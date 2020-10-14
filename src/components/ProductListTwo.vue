@@ -1,0 +1,72 @@
+<template>
+  <div id="product-list-two">
+   <h3>Product list two</h3>
+  <ul>
+      <li v-for="(product, index) in saleProducts" :key="index">
+       <span class="name">{{product.name}} </span>
+       <span class="price">KSH {{product.price }}</span>
+       <button @click="updatePrice(product.id)" class="btn">Update Price</button>
+      </li>
+  </ul>
+  </div>   
+</template>
+
+<script>
+import {mapGetters, mapActions} from 'vuex'
+export default {
+ computed: {
+    products() {
+      return this.$store.state.products
+    },
+    //  saleProducts() {
+    //   return this.$store.getters.saleProducts
+    // }
+
+    ...mapGetters([
+      'saleProducts'
+    ])
+  },
+  methods: {
+    // updatePrice(id){
+    //   this.$store.dispatch('updatePrice',id)
+    // }
+
+    ...mapActions([
+      'updatePrice'
+    ])
+  },
+}
+</script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped lang="scss">
+#product-list-two{
+    background: #D1E4FF;
+    box-shadow: 1px 2px 3px rgba(0,0,0,0.2);
+    margin-bottom: 30px;
+    padding: 10px 20px;
+}
+#product-list-two ul{
+    padding: 0;
+    list-style-type: none;
+}
+#product-list-two li{
+    margin-right: 10px;
+    margin-top: 10px;
+    padding: 20px;
+    background: rgba(255,255,255,0.7);
+}
+.price{
+    font-weight: bold;
+    color: #860CE8;
+    display: block;
+}
+.btn {
+  color: wheat;
+  background: rgb(16, 93, 138);
+  border-radius: 50px;
+  padding: 8.0px;
+  border: none;
+  cursor: pointer;
+}
+</style>
